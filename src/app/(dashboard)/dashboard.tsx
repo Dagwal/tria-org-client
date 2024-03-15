@@ -25,7 +25,7 @@ export const Dashboard: React.FC = () => {
       <h1>Dashboard Page</h1>
       <div className="w-full h-full">
         {employees.map((employee: any) => (
-          <EmployeeItem key={employee.id} employee={employee} />
+          <EmployeeItem key={employee.id} departement={employee} />
         ))}
       </div>
     </div>

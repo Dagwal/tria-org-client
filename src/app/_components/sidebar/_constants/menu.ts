@@ -1,4 +1,4 @@
-import { IconAward, IconBrandSpeedtest, IconShoppingCart, IconUsers } from '@tabler/icons-react';
+import { IconAward, IconBrandSpeedtest, IconShoppingCart, IconUsers, IconUsersGroup } from '@tabler/icons-react';
 import { MenuLinks } from '../models';
 
 export const myMenus: MenuLinks.SidebarLinks[] = [
@@ -8,8 +8,8 @@ export const myMenus: MenuLinks.SidebarLinks[] = [
     link: '/',
   },
   {
-    label: 'Employees',
-    icon: IconUsers,
-    link: '/employees',
+    label: 'Departement',
+    icon: IconUsersGroup,
+    link: '/departement',
   },
 ];

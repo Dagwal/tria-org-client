@@ -13,7 +13,7 @@ const departementSlice = createSlice({
   name: 'departements',
   initialState,
   reducers: {
-    setDepartement(state, action: PayloadAction<Departement[]>) {
+    getDepartement(state, action: PayloadAction<Departement[]>) {
       state.departement = action.payload;
     },
     addDepartement(state, action: PayloadAction<Departement>) {
@@ -31,5 +31,5 @@ const departementSlice = createSlice({
   },
 });
 
-export const { setDepartement, addDepartement, updateDepartement, removeDepartement } = departementSlice.actions;
+export const { getDepartement, addDepartement, updateDepartement, removeDepartement } = departementSlice.actions;
 export default departementSlice.reducer;

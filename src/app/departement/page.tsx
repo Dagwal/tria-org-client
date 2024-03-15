@@ -4,18 +4,19 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { fetchDepartments } from "@/store/slices/call";
-import EmployeeItem from "../_components/DepartmentItem";
+import DepartementItem from "../_components/DepartmentItem";
 import { Dispatch } from "@reduxjs/toolkit";
 import { Box, Button, Flex, Modal, Text } from "@mantine/core";
 import Sidebar from "../_components/sidebar/sidebar";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import styles from "../_components/sidebar/sidebar.module.scss";
-import { IconDeviceFloppy, IconPlus } from "@tabler/icons-react";
-import { EmployeeForm } from "../_components/add-employee-modal";
+import { IconPlus } from "@tabler/icons-react";
+import { DepartementForm } from "../_components/add-employee-modal";
+import { TableSelection } from "../_components/DepartementList";
 
 export const Dashboard: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const employees = useSelector((state: RootState) => state.departement.departement);
+  const departements = useSelector((state: RootState) => state.departement.departement);
 
   useEffect(() => {
     dispatch(fetchDepartments());
@@ -23,15 +24,17 @@ export const Dashboard: React.FC = () => {
 
   return (
     <div>
-      <h1>Employees Page</h1>
+      <h1>Departements Page</h1>
       <div className="w-full h-full">
-        {employees.map((employee: any) => (
-          <EmployeeItem key={employee.id} employee={employee} />
+        {departements.map((departement: any) => (
+          <DepartementItem key={departement.id} departement={departement} />
         ))}
       </div>
     </div>
   );
 };
+
+
 
 export default function DashboardPage() {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -61,21 +64,21 @@ export default function DashboardPage() {
               variant="outline"
               size="xs"
               onClick={open}
-              w={140}
+              w={160}
             >
-              Add Employee
+              Add Departement
             </Button>
             <Modal
               opened={opened}
               onClose={close}
-              title="Add New Employee"
+              title="Add New Department"
               size="md"
             >
-              <EmployeeForm closeModal={close} />
+              <DepartementForm closeModal={close} />
             </Modal>
           </Flex>
 
-          <Dashboard />
+          <TableSelection />
         </Box>
       </Box>
     </Flex>

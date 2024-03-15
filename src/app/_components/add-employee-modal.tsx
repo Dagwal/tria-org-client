@@ -21,7 +21,7 @@ const ddata = [
   "Product",
 ];
 
-export interface EmployeeResponseType {
+export interface DepartementResponseType {
   name: string;
   description: string;
   parentId: UUID;
@@ -33,7 +33,7 @@ const employeeSchema: ZodType<any> = z.object({
   parentId: z.string().uuid().min(1, { message: "Parent is required" }),
 });
 
-export function EmployeeForm({ closeModal }: { closeModal: () => void }) {
+export function DepartementForm({ closeModal }: { closeModal: () => void }) {
   const {
     handleSubmit,
     register,
@@ -43,9 +43,9 @@ export function EmployeeForm({ closeModal }: { closeModal: () => void }) {
     resolver: zodResolver(employeeSchema),
   });
 
-  // const [saveEmployee] = setDepartement({});
+  // const [saveDepartement] = setDepartement({});
 
-  const onSubmit = async (data: EmployeeResponseType) => {
+  const onSubmit = async (data: DepartementResponseType) => {
     setIsLoading(true);
     const tempData = {
       ...data,
@@ -53,7 +53,7 @@ export function EmployeeForm({ closeModal }: { closeModal: () => void }) {
 
     try {
       closeModal();
-      // const res = await saveEmployee(tempData).unwrap();
+      // const res = await saveDepartement(tempData).unwrap();
     } catch (e) {
       setIsLoading(false);
     }

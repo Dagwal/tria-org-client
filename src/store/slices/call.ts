@@ -1,15 +1,15 @@
 import axios from "axios";
 import { Departement } from "../types";
 import { Dispatch } from "@reduxjs/toolkit";
-import { addDepartement, removeDepartement, setDepartement, updateDepartement } from "./employeeSlice";
+import { addDepartement, removeDepartement, getDepartement, updateDepartement } from "./employeeSlice";
 
 const baseUrl = 'http://localhost:4500';
 
 export const fetchDepartments = () => async (dispatch: Dispatch) => {
   try {
-    // Make API call to fetch employee
+    // Make API call to fetch departement
     const response = await axios.get(baseUrl + '/api/departement');
-    dispatch(setDepartement(response.data));
+    dispatch(getDepartement(response.data));
   } catch (error) {
     // Handle error
     console.error('Error fetching departement:', error);
@@ -18,9 +18,9 @@ export const fetchDepartments = () => async (dispatch: Dispatch) => {
 
 export const fetchDepartmentsHeirarchical = () => async (dispatch: Dispatch) => {
   try {
-    // Make API call to fetch departement
+    // Make API call to fetch departement heirarchical
     const response = await axios.get(baseUrl + '/api/departement/hierarchical');
-    dispatch(setDepartement(response.data));
+    dispatch(getDepartement(response.data));
   } catch (error) {
     // Handle error
     console.error('Error fetching departement:', error);
