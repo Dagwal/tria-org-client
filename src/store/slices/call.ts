@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Departement } from "../types";
-import { Dispatch } from "@reduxjs/toolkit";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 import { addDepartement, removeDepartement, getDepartement, updateDepartement } from "./employeeSlice";
 
 const baseUrl = 'http://localhost:4500';
@@ -38,7 +38,7 @@ export const createDepartment = (departementData: Departement) => async (dispatc
   }
 };
 
-export const changeDepartment = (id: string, departementData: Departement) => async (dispatch: Dispatch) => {
+export const changeDepartment = (id: string, departementData: Departement) => async (dispatch: Dispatch<UnknownAction>) => {
   try {
     // Make API call to update departement
     const response = await axios.put(baseUrl + `/api/departement/${id}`, departementData);

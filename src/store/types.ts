@@ -1,7 +1,7 @@
 export interface Departement {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   parentId?: string | null;
-  children: Departement[];
+  children?: Departement[];
 }

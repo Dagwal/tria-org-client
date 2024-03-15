@@ -1,12 +1,16 @@
-import { Button, Flex, MultiSelect, Paper, Text, Textarea } from "@mantine/core";
-
+import {
+  Button,
+  Flex,
+  MultiSelect,
+  Paper,
+  Textarea,
+} from "@mantine/core";
+import { createDepartment } from "@/store/slices/call";
 import { Controller, useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { useSubmitResponseMutation } from "@/store/api/employee/employee.api";
 import { useState } from "react";
 import { UUID } from "crypto";
-import { setDepartement } from "@/store/slices/employeeSlice";
 
 const ddata = [
   "CEO",
@@ -14,7 +18,7 @@ const ddata = [
   "CFO",
   "HR",
   "Sales",
-  "Marketing", 
+  "Marketing",
   "Operations",
   "Finance",
   "Engineering",
@@ -25,12 +29,14 @@ export interface DepartementResponseType {
   name: string;
   description: string;
   parentId: UUID;
+  tags: string[];
 }
 
 const employeeSchema: ZodType<any> = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   description: z.string().min(1, { message: "Description is required" }),
   parentId: z.string().uuid().min(1, { message: "Parent is required" }),
+  tags: z.array(z.string()).optional(),
 });
 
 export function DepartementForm({ closeModal }: { closeModal: () => void }) {
@@ -43,19 +49,22 @@ export function DepartementForm({ closeModal }: { closeModal: () => void }) {
     resolver: zodResolver(employeeSchema),
   });
 
-  // const [saveDepartement] = setDepartement({});
-
   const onSubmit = async (data: DepartementResponseType) => {
+    console.log('Form submitted with data:', data);
     setIsLoading(true);
-    const tempData = {
-      ...data,
-    };
-
     try {
-      closeModal();
-      // const res = await saveDepartement(tempData).unwrap();
-    } catch (e) {
-      setIsLoading(false);
+      // Call the API function to create a department with the form data
+      // await createDepartment({
+      //   name: data.name,
+      //   description: data.description,
+      //   parentId: data.parentId,
+      // });
+      await createDepartment(data);
+      closeModal(); // Close the modal upon successful submission
+    } catch (error) {
+      console.error("Error creating department:", error);
+    } finally {
+      setIsLoading(false); // Ensure isLoading is set to false whether successful or not
     }
   };
 
@@ -75,7 +84,7 @@ export function DepartementForm({ closeModal }: { closeModal: () => void }) {
           label="Departement Name"
           mt={"md"}
           {...register("name")}
-          error={errors.rephrasedQuestion?.message?.toString()}
+          error={errors.name?.message?.toString()}
           withAsterisk
         />
 
@@ -83,7 +92,15 @@ export function DepartementForm({ closeModal }: { closeModal: () => void }) {
           label="Description"
           mt={"md"}
           {...register("description")}
-          error={errors.request?.message?.toString()}
+          error={errors.description?.message?.toString()}
+          withAsterisk
+        />
+
+        <Textarea
+          label="Parent Id"
+          mt={"md"}
+          {...register("parentId")}
+          error={errors.parentId?.message?.toString()}
           withAsterisk
         />
 
