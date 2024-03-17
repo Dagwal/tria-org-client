@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { fetchDepartments } from "@/store/slices/call";
+import { fetchDepartements } from "@/store/slices/call";
 import DepartementItem from "../_components/DepartmentItem";
 import { Dispatch } from "@reduxjs/toolkit";
 import { Box, Button, Flex, Modal, Text } from "@mantine/core";
@@ -19,7 +19,7 @@ export const Dashboard: React.FC = () => {
   const departements = useSelector((state: RootState) => state.departement.departement);
 
   useEffect(() => {
-    dispatch(fetchDepartments());
+    dispatch(fetchDepartements());
   }, [dispatch]);
 
   return (
@@ -71,7 +71,7 @@ export default function DashboardPage() {
             <Modal
               opened={opened}
               onClose={close}
-              title="Add New Department"
+              title="Add New Departement"
               size="md"
             >
               <DepartementForm closeModal={close} />

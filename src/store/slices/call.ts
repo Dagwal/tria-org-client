@@ -5,7 +5,7 @@ import { addDepartement, removeDepartement, getDepartement, updateDepartement } 
 
 const baseUrl = 'http://localhost:4500';
 
-export const fetchDepartments = () => async (dispatch: Dispatch) => {
+export const fetchDepartements = () => async (dispatch: Dispatch) => {
   try {
     // Make API call to fetch departement
     const response = await axios.get(baseUrl + '/api/departement');
@@ -16,7 +16,7 @@ export const fetchDepartments = () => async (dispatch: Dispatch) => {
   }
 };
 
-export const fetchDepartmentsHeirarchical = () => async (dispatch: Dispatch) => {
+export const fetchDepartementsHeirarchical = () => async (dispatch: Dispatch) => {
   try {
     // Make API call to fetch departement heirarchical
     const response = await axios.get(baseUrl + '/api/departement/hierarchical');
@@ -27,8 +27,9 @@ export const fetchDepartmentsHeirarchical = () => async (dispatch: Dispatch) => 
   }
 }
 
-export const createDepartment = (departementData: Departement) => async (dispatch: Dispatch) => {
+export const createDepartement = (departementData: Departement) => async (dispatch: Dispatch) => {
   try {
+    console.log('Creating department:', departementData);
     // Make API call to create departement
     const response = await axios.post(baseUrl + '/api/departement', departementData);
     dispatch(addDepartement(response.data));
@@ -38,7 +39,7 @@ export const createDepartment = (departementData: Departement) => async (dispatc
   }
 };
 
-export const changeDepartment = (id: string, departementData: Departement) => async (dispatch: Dispatch<UnknownAction>) => {
+export const changeDepartement = (id: string, departementData: Departement) => async (dispatch: Dispatch<UnknownAction>) => {
   try {
     // Make API call to update departement
     const response = await axios.put(baseUrl + `/api/departement/${id}`, departementData);
@@ -49,7 +50,7 @@ export const changeDepartment = (id: string, departementData: Departement) => as
   }
 };
 
-export const deleteDepartment = (id: string) => async (dispatch: Dispatch) => {
+export const deleteDepartement = (id: string) => async (dispatch: Dispatch) => {
   try {
     // Make API call to delete departement
     await axios.delete(baseUrl + `/api/departement/${id}`);

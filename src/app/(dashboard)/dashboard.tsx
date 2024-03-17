@@ -3,8 +3,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { fetchDepartments } from "@/store/slices/call";
-import EmployeeItem from "../_components/DepartmentItem";
+import { fetchDepartements } from "@/store/slices/call";
+import DepartementItem from "../_components/DepartmentItem";
 import { Dispatch } from "@reduxjs/toolkit";
 import { Box, Flex, Text } from "@mantine/core";
 import Sidebar from "../_components/sidebar/sidebar";
@@ -14,18 +14,18 @@ import styles from "../_components/sidebar/sidebar.module.scss";
 
 export const Dashboard: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const employees = useSelector((state: RootState) => state.departement.departement);
+  const departements = useSelector((state: RootState) => state.departement.departement);
 
   useEffect(() => {
-    dispatch(fetchDepartments());
+    dispatch(fetchDepartements());
   }, [dispatch]);
 
   return (
     <div>
       <h1>Dashboard Page</h1>
       <div className="w-full h-full">
-        {employees.map((employee: any) => (
-          <EmployeeItem key={employee.id} departement={employee} />
+        {departements.map((departement: any) => (
+          <DepartementItem key={departement.id} departement={departement} />
         ))}
       </div>
     </div>
@@ -40,7 +40,6 @@ export default function DashboardPage() {
       <nav
         className={styles.nav}
         style={{
-          // backgroundColor: "#fff",
           display: isMobile ? "none" : "block",
         }}
       >

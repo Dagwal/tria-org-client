@@ -5,7 +5,7 @@ import {
   Paper,
   Textarea,
 } from "@mantine/core";
-import { createDepartment } from "@/store/slices/call";
+import { createDepartement } from "@/store/slices/call";
 import { Controller, useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,7 +33,7 @@ export interface DepartementResponseType {
 }
 
 const employeeSchema: ZodType<any> = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
+  name: z.string().min(1, { message: "Departement Name is required" }),
   description: z.string().min(1, { message: "Description is required" }),
   parentId: z.string().uuid().min(1, { message: "Parent is required" }),
   tags: z.array(z.string()).optional(),
@@ -59,7 +59,7 @@ export function DepartementForm({ closeModal }: { closeModal: () => void }) {
       //   description: data.description,
       //   parentId: data.parentId,
       // });
-      await createDepartment(data);
+      await createDepartement(data);
       closeModal(); // Close the modal upon successful submission
     } catch (error) {
       console.error("Error creating department:", error);

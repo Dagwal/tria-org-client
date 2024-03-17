@@ -3,10 +3,12 @@ import { Departement } from '../types';
 
 interface DepartementState {
   departement: Departement[];
+  heirarchicalDepartement: Departement | null;
 }
 
 const initialState: DepartementState = {
   departement: [],
+  heirarchicalDepartement: null,
 };
 
 const departementSlice = createSlice({
@@ -16,6 +18,11 @@ const departementSlice = createSlice({
     getDepartement(state, action: PayloadAction<Departement[]>) {
       state.departement = action.payload;
     },
+
+    getchDepartementsHeirarchical(state, action: PayloadAction<Departement>) {
+      state.heirarchicalDepartement = action.payload;
+    },
+    
     addDepartement(state, action: PayloadAction<Departement>) {
       state.departement.push(action.payload);
     },
