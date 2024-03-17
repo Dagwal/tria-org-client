@@ -27,15 +27,13 @@ export const fetchDepartementsHeirarchical = () => async (dispatch: Dispatch) =>
   }
 }
 
-export const createDepartement = (departementData: Departement) => async (dispatch: Dispatch) => {
+export const createDepartement = (departmentData: Departement) => async (dispatch: Dispatch) => {
   try {
-    console.log('Creating department:', departementData);
-    // Make API call to create departement
-    const response = await axios.post(baseUrl + '/api/departement', departementData);
+    const response = await axios.post(baseUrl + '/api/department', departmentData);
     dispatch(addDepartement(response.data));
   } catch (error) {
-    // Handle error
-    console.error('Error creating departement:', error);
+    console.error('Error creating department:', error);
+    // Optionally dispatch an action to handle the error in the Redux store
   }
 };
 
