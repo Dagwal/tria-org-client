@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { fetchDepartements } from "@/store/slices/call";
+import { fetchDepartements } from "@/store/slices/action";
 import DepartementItem from "../_components/DepartmentItem";
 import { Dispatch } from "@reduxjs/toolkit";
 import { Box, Button, Flex, Modal, Text } from "@mantine/core";
@@ -12,7 +12,7 @@ import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import styles from "../_components/sidebar/sidebar.module.scss";
 import { IconPlus } from "@tabler/icons-react";
 import { DepartementForm } from "../_components/add-employee-modal";
-import { TableSelection } from "../_components/DepartementList";
+import { TableSelection } from "../_components/DepartementTable";
 
 export const Dashboard: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();

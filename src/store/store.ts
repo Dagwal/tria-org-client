@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import departementReducer from './slices/employeeSlice';
+import departementReducer from './slices/reducers';
 
 // combine reducers and create the Redux store.
 const store = configureStore({

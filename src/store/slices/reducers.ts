@@ -19,7 +19,7 @@ const departementSlice = createSlice({
       state.departement = action.payload;
     },
 
-    getchDepartementsHeirarchical(state, action: PayloadAction<Departement>) {
+    getHeirarchicalDepartements(state, action: PayloadAction<Departement>) {
       state.heirarchicalDepartement = action.payload;
     },
     
@@ -38,5 +38,5 @@ const departementSlice = createSlice({
   },
 });
 
-export const { getDepartement, addDepartement, updateDepartement, removeDepartement } = departementSlice.actions;
+export const { getDepartement, addDepartement, updateDepartement, removeDepartement, getHeirarchicalDepartements } = departementSlice.actions;
 export default departementSlice.reducer;

@@ -1,16 +1,13 @@
-import {
-  Button,
-  Flex,
-  MultiSelect,
-  Paper,
-  Textarea,
-} from "@mantine/core";
-import { createDepartement } from "@/store/slices/call";
+"use client";
+import { Button, Flex, Paper, Select, Textarea } from "@mantine/core";
+import { createDepartement, fetchDepartements } from "@/store/slices/action";
 import { Controller, useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { UUID } from "crypto";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
 
 const ddata = [
   "CEO",
@@ -48,29 +45,22 @@ export function DepartementForm({ closeModal }: { closeModal: () => void }) {
   } = useForm<z.infer<typeof employeeSchema>>({
     resolver: zodResolver(employeeSchema),
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch: Dispatch<any> = useDispatch();
+  const onError = (error: any) => {};
 
-  const onSubmit = async (data: DepartementResponseType) => {
-    console.log('Form submitted with data:', data);
+  const onSubmit = (data: DepartementResponseType) => {
+    console.log("Form submitted with data:", data);
     setIsLoading(true);
     try {
-      // Call the API function to create a department with the form data
-      // await createDepartment({
-      //   name: data.name,
-      //   description: data.description,
-      //   parentId: data.parentId,
-      // });
-      await createDepartement(data);
-      closeModal(); // Close the modal upon successful submission
+      dispatch(createDepartement(data));
+      closeModal();
     } catch (error) {
       console.error("Error creating department:", error);
     } finally {
-      setIsLoading(false); // Ensure isLoading is set to false whether successful or not
+      setIsLoading(false);
     }
   };
-
-  const onError = (error: any) => {};
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <Paper
@@ -108,7 +98,7 @@ export function DepartementForm({ closeModal }: { closeModal: () => void }) {
           control={control}
           name="tags"
           render={({ field }) => (
-            <MultiSelect
+            <Select
               {...field}
               mt={"md"}
               mb={"md"}
